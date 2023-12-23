@@ -67,14 +67,13 @@ document.addEventListener("DOMContentLoaded", () => {
           `.card-container-item:nth-child(${index}) .card-container-item-2 li:nth-child(2)`
         ).innerHTML = "<b>Region:</b> " + ele.region;
 
-      
         document.querySelector(
           `.card-container-item:nth-child(${index}) .card-container-item-2 li:nth-child(3)`
         ).innerHTML = "<b>Capital:</b> " + ele.capital;
 
         index++;
       });
-      
+
       let flag = true;
 
       document
@@ -82,8 +81,52 @@ document.addEventListener("DOMContentLoaded", () => {
         .addEventListener("click", () => {
           if (flag) {
             document.body.style.backgroundColor = "#33313b";
+            document.querySelector("nav").style.backgroundColor = "#4a4854";
+            document.querySelector("nav").style.color = "white";
+            let content = document.querySelectorAll(".input-filter-item");
+            content.forEach((ele) => {
+              ele.style.backgroundColor = "#4a4854";
+              ele.style.color = "white";
+            });
+            let cardContent = document.querySelectorAll(".card-container-item");
+            cardContent.forEach((ele) => {
+              ele.style.backgroundColor = "#4a4854";
+              ele.style.color = "white";
+            });
+            let boldContent = document.querySelectorAll("b");
+            boldContent.forEach((ele) => {
+              ele.style.color = "white";
+            });
+
+            document.querySelector("select").style.backgroundColor = "#4a4854";
+
+            let myOptions = document.querySelectorAll(".filter-region-option");
+            myOptions.forEach((ele) => {
+              ele.style.color = "white";
+            });
           } else {
             document.body.style.backgroundColor = "hsl(0, 0%, 98%)";
+            document.querySelector("nav").style.backgroundColor = "white";
+            document.querySelector("nav").style.color = "black";
+            let content = document.querySelectorAll(".input-filter-item");
+            content.forEach((ele) => {
+              ele.style.backgroundColor = "white";
+              ele.style.color = "black";
+            });
+            let cardContent = document.querySelectorAll(".card-container-item");
+            cardContent.forEach((ele) => {
+              ele.style.backgroundColor = "white";
+              ele.style.color = "black";
+            });
+            let boldContent = document.querySelectorAll("b");
+            boldContent.forEach((ele) => {
+              ele.style.color = "rgb(66, 65, 65)";
+            });
+            document.querySelector("select").style.backgroundColor = "white";
+            let myOptions = document.querySelectorAll(".filter-region-option");
+            myOptions.forEach((ele) => {
+              ele.style.color = "black";
+            });
           }
           flag = !flag;
         });

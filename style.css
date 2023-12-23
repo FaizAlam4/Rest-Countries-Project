@@ -37,7 +37,7 @@ nav {
 }
 
 .input-filter {
-    width: 90%;
+    width: 95%;
     margin: auto;
     display: flex;
     flex-flow: column nowrap;
@@ -60,9 +60,6 @@ nav {
 }
 
 
-.input-filter i {
-    transform: translate(3vh, 1vh);
-}
 
 
 .input-filter-item:nth-child(1) input {
@@ -75,7 +72,7 @@ nav {
 
 .input-filter-item:nth-child(1) i {
     width: 10%;
-    transform: translate(15%, 3.5vh);
+    transform: translate(50%, 3.5vh);
 }
 
 .input-filter-item:nth-child(2) {
@@ -161,7 +158,7 @@ b {
     }
 
     .input-filter-item:nth-child(1) {
-        width: 40%;
+        width: 30%;
         margin: 0;
     }
 }

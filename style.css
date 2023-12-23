@@ -1,0 +1,128 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    border: none;
+    font-family: 'Nunito Sans', sans-serif;
+    font-family: 'Public Sans', sans-serif;
+}
+
+body {
+    background-color: hsl(0, 0%, 98%);
+    height: 100vh;
+    width: 100vw;
+}
+
+
+nav {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-around;
+    align-items: center;
+    height: 10vh;
+    gap: 20px;
+    background-color: white;
+}
+
+.nav-item:nth-child(2):hover{
+    cursor: pointer;
+}
+
+.input-filter{
+    width: 90%;
+    margin: auto;
+}
+.input-filter-item:nth-child(1) {
+    width: 100%;
+    height: auto;
+    margin: 4vh auto;
+    background-color: white;
+    box-shadow: 2px 1px 1px 1px rgb(232, 226, 226);
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: space-between;
+    gap:20px;
+
+}
+
+.input-filter-item {
+    height: 5vh;
+    margin: 20px;
+    background-color: white;
+}
+
+.input-filter i{
+    transform: translate(3vh, 2vh);
+}
+
+.input-filter-item:nth-child(1) input{
+    display: inline-block;
+    height: 100%;
+    padding-left: 7vh;
+    transform: translate(1vh,-2vh);
+    background-color: rgba(240, 248, 255, 0);
+}
+
+.input-filter-item:nth-child(2) {
+    width: 60%;
+    padding: 2px;
+    height: 30px;
+}
+
+select{
+    background-color: white;
+}
+
+.card-container{
+    display: flex;
+    flex-flow: column nowrap;
+    width: 100%;
+    justify-content: space-around;
+    align-items: center;
+    margin: 17vh auto;
+    gap:10vh;
+}
+.card-container-item{
+    width: 70%;
+    margin: auto;
+    background-color: white;
+  
+}
+.card-container-item .card-container-item-1 img{
+   
+width: 100%;
+margin: auto;
+}
+.card-container-item-2{
+  padding: 2vh 20px;
+  line-height:2;
+}
+
+.list-wrapper{
+    list-style: none;
+}
+
+b{
+    font-weight:600;
+    color: rgb(66, 65, 65);
+}
+
+
+@media(min-width: 530px){
+    .card-container{
+        display: flex;
+        flex-flow: row wrap;
+        /* margin: 10px 40px; */
+         
+        
+    }
+    .card-container-item{
+        width: 20vw;
+    }
+ 
+    .card-container-item-1 img{
+       object-fit:contain;
+       width: 100%;
+        height: 150px
+    }
+}

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Rest Countries</title>
+    <script
+      src="https://kit.fontawesome.com/8524d5bb63.js"
+      crossorigin="anonymous"
+    ></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito+Sans:opsz,wght@6..12,300;6..12,600;6..12,800&family=Public+Sans&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <nav>
+      <div class="nav-item">Where in the world?</div>
+      <div class="nav-item"><i class="fa-regular fa-moon"></i> Dark Mode</div>
+    </nav>
+    <div class="input-filter">
+      <div class="input-filter-item">
+
+        <label for="filter-icon"><i class="fa-solid fa-magnifying-glass"></i></label>
+        <input id="filter-icon" placeholder="Search for a country" type="text">
+      </div>
+
+     <div class="input-filter-item">
+      <label for="filter-region">Filter by Region</label>
+      <select name="my-region" id="filter-region">
+        <option value="" disabled selected></option>
+        <option value="" class="filter-region-option">Africa</option>
+        <option value="" class="filter-region-option">America</option>
+        <option value="" class="filter-region-option">Asia</option>
+        <option value="" class="filter-region-option">Europe</option>
+        <option value="" class="filter-region-option">Oceania</option>
+      </select>
+     </div>
+    </div>
+
+    <section>
+      <div class="card-container">
+
+        
+      </div>
+    </section>
+    <script src="./server.js"></script>
+  </body>
+</html>

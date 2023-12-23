@@ -17,13 +17,21 @@ body {
 nav {
     display: flex;
     flex-flow: row nowrap;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
     height: 10vh;
     gap: 20px;
     background-color: white;
 }
 
+.nav-item:nth-child(1){
+    margin-left: 5vw;
+    font-size: 1.3rem;
+    font-weight: bolder;
+}
+.nav-item:nth-child(2){
+    margin-right: 6vw;
+}
 .nav-item:nth-child(2):hover {
     cursor: pointer;
 }
@@ -47,7 +55,8 @@ nav {
 .input-filter-item {
     margin: 20px;
     background-color: white;
-    box-shadow: 2px 1px 1px 1px rgb(232, 226, 226);
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    border-radius: 1vh;
 }
 
 

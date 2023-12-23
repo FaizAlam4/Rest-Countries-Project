@@ -66,7 +66,7 @@ nav {
 
 
 .input-filter-item:nth-child(1) input {
-    transform: translate(1%, 0.7vh);
+    transform: translate(0%, 0.2vh);
     background-color: rgba(240, 248, 255, 0);
     width: 70%;
     height: 8vh;
@@ -75,7 +75,7 @@ nav {
 
 .input-filter-item:nth-child(1) i {
     width: 10%;
-    margin-top: 3vh;
+    margin-top: 2vh;
 }
 
 .input-filter-item:nth-child(2) {
@@ -136,10 +136,10 @@ b {
     .card-container {
         display: flex;
         flex-flow: row wrap; 
-        justify-content: center;
+        justify-content: start;
        align-content:center;
        width: 100%;
-        
+        padding-left: 5%;
     
     }
 

@@ -84,11 +84,11 @@ select {
 .card-container {
     display: flex;
     flex-flow: column nowrap;
-    width: 100%;
+    width: 90%;
     justify-content: space-around;
     align-items: center;
     margin: 17vh auto;
-    gap: 10vh;
+    gap: 5vh;
 }
 
 .card-container-item {

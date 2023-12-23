@@ -26,7 +26,7 @@ nav {
 
 .nav-item:nth-child(1){
     margin-left: 5vw;
-    font-size: 1.3rem;
+    font-size: 1rem;
     font-weight: bolder;
 }
 .nav-item:nth-child(2){
@@ -103,12 +103,12 @@ select {
     
     background-color: white;
     border-radius: 10px;
-    width: 340px;
+    width: 270px;
 }
 
 .card-container-item .card-container-item-1 img {
 
-    width: 340px;
+    width: 270px;
     margin: auto;
     height: 170px;
     object-fit: cover;
@@ -134,6 +134,9 @@ b {
 }
 
 @media(min-width:530px) {
+    .nav-item:nth-child(1){
+        font-size: 1.3rem;
+    }
     .card-container {
         display: flex;
         flex-flow: row wrap; 
@@ -144,7 +147,14 @@ b {
     
     }
 
-
+    .card-container-item {
+ 
+        width: 340px;
+    }
+    
+    .card-container-item .card-container-item-1 img {
+        width: 340px;
+    }
     .input-filter {
         flex-flow: row nowrap;
         justify-content: space-between;

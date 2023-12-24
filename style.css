@@ -22,6 +22,8 @@ nav {
     height: 10vh;
     gap: 20px;
     background-color: white;
+    margin-bottom: 1rem;
+    box-shadow:rgba(99, 99, 99, 0.2) 0px 2px 8px 0px; ;
 }
 
 .nav-item:nth-child(1){
@@ -132,7 +134,9 @@ b {
     font-weight: 600;
     color: rgb(66, 65, 65);
 }
-
+.card-container-1,.card-container-2,.card-container-3,.card-container-4, .card-container-5{
+    display: none;
+}
 @media(min-width:530px) {
     .nav-item:nth-child(1){
         font-size: 1.3rem;

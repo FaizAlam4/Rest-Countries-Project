@@ -19,8 +19,10 @@ document.addEventListener("DOMContentLoaded", () => {
         return acc;
       }, {});
 
+      // making card-dom
       var index = 1;
-      data.forEach((ele) => {
+
+      function createCard() {
         let newCard = document.createElement("div");
         newCard.className = "card-container-item";
         let div1 = document.createElement("div");
@@ -48,10 +50,11 @@ document.addEventListener("DOMContentLoaded", () => {
         listItem2.className = "list-item";
         listItem3.className = "list-item";
 
-        list.appendChild(listItem1);
-        list.appendChild(listItem2);
-        list.appendChild(listItem3);
+        list.append(listItem1, listItem2, listItem3);
+      }
 
+      data.forEach((ele) => {
+        createCard();
         document.querySelector(
           `.card-container-item:nth-child(${index}) .card-container-item-1`
         ).innerHTML = `<img src="${ele.flags.svg}">`;
@@ -74,23 +77,28 @@ document.addEventListener("DOMContentLoaded", () => {
         index++;
       });
 
-      let flag = true;
+      // filter for region
+      data.forEach((ele)=>{
 
+      })
+
+      // dark-mode
+      let flag = true;
       document
         .querySelector(".nav-item:nth-child(2)")
         .addEventListener("click", () => {
           if (flag) {
-            document.body.style.backgroundColor = "#33313b";
-            document.querySelector("nav").style.backgroundColor = "#4a4854";
+            document.body.style.backgroundColor = "hsl(207, 26%, 17%)";
+            document.querySelector("nav").style.backgroundColor = "hsl(209, 23%, 22%)";
             document.querySelector("nav").style.color = "white";
             let content = document.querySelectorAll(".input-filter-item");
             content.forEach((ele) => {
-              ele.style.backgroundColor = "#4a4854";
+              ele.style.backgroundColor = "hsl(209, 23%, 22%)";
               ele.style.color = "white";
             });
             let cardContent = document.querySelectorAll(".card-container-item");
             cardContent.forEach((ele) => {
-              ele.style.backgroundColor = "#4a4854";
+              ele.style.backgroundColor = "hsl(209, 23%, 22%)";
               ele.style.color = "white";
             });
             let boldContent = document.querySelectorAll("b");
@@ -98,7 +106,8 @@ document.addEventListener("DOMContentLoaded", () => {
               ele.style.color = "white";
             });
 
-            document.querySelector("select").style.backgroundColor = "#4a4854";
+            document.querySelector("select").style.backgroundColor = "hsl(209, 23%, 22%)";
+            document.querySelector("select").style.color = "white";
 
             let myOptions = document.querySelectorAll(".filter-region-option");
             myOptions.forEach((ele) => {
@@ -123,6 +132,7 @@ document.addEventListener("DOMContentLoaded", () => {
               ele.style.color = "rgb(66, 65, 65)";
             });
             document.querySelector("select").style.backgroundColor = "white";
+            document.querySelector("select").style.color = "black";
             let myOptions = document.querySelectorAll(".filter-region-option");
             myOptions.forEach((ele) => {
               ele.style.color = "black";

@@ -4,25 +4,10 @@ document.addEventListener("DOMContentLoaded", () => {
     try {
       var ans = await fetch("https://restcountries.com/v3.1/all");
       var data = await ans.json();
-      console.log(data);
-
-      let myObj = data.reduce((acc, ele) => {
-        if (acc[ele.region] == undefined) {
-          acc[ele.region] = [];
-        }
-
-        acc[ele.region].push({
-          country: ele.name.common,
-          population: ele.population,
-          capital: ele.capital,
-        });
-        return acc;
-      }, {});
 
       // making card-dom
-      var index = 1;
 
-      function createCard() {
+      function createCard(containerName, index, ele) {
         let newCard = document.createElement("div");
         newCard.className = "card-container-item";
         let div1 = document.createElement("div");
@@ -30,9 +15,9 @@ document.addEventListener("DOMContentLoaded", () => {
         let div2 = document.createElement("div");
         div2.className = "card-container-item-2";
 
-        document.querySelector(".card-container").appendChild(newCard);
-        newCard.appendChild(div1);
-        newCard.appendChild(div2);
+        document.querySelector(containerName).appendChild(newCard);
+        newCard.append(div1, div2);
+
         let list = document.createElement("ul");
         list.className = "list-wrapper";
 
@@ -51,36 +36,108 @@ document.addEventListener("DOMContentLoaded", () => {
         listItem3.className = "list-item";
 
         list.append(listItem1, listItem2, listItem3);
-      }
 
-      data.forEach((ele) => {
-        createCard();
         document.querySelector(
-          `.card-container-item:nth-child(${index}) .card-container-item-1`
+          `${containerName} .card-container-item:nth-child(${index}) .card-container-item-1`
         ).innerHTML = `<img src="${ele.flags.svg}">`;
 
         document.querySelector(
-          `.card-container-item:nth-child(${index}) .card-container-item-2 .list-item-title`
+          `${containerName} .card-container-item:nth-child(${index}) .card-container-item-2 .list-item-title`
         ).innerText = ele.name.common;
 
         document.querySelector(
-          `.card-container-item:nth-child(${index}) .card-container-item-2 li:nth-child(1)`
+          `${containerName} .card-container-item:nth-child(${index}) .card-container-item-2 li:nth-child(1)`
         ).innerHTML = "<b>Population:</b> " + ele.population;
         document.querySelector(
-          `.card-container-item:nth-child(${index}) .card-container-item-2 li:nth-child(2)`
+          `${containerName} .card-container-item:nth-child(${index}) .card-container-item-2 li:nth-child(2)`
         ).innerHTML = "<b>Region:</b> " + ele.region;
 
         document.querySelector(
-          `.card-container-item:nth-child(${index}) .card-container-item-2 li:nth-child(3)`
+          `${containerName} .card-container-item:nth-child(${index}) .card-container-item-2 li:nth-child(3)`
         ).innerHTML = "<b>Capital:</b> " + ele.capital;
+      }
 
+      var index = 1,
+        index1 = 1,
+        index2 = 1,
+        index3 = 1,
+        index4 = 1,
+        index5 = 1;
+      data.forEach((ele) => {
+        createCard(".card-container", index, ele);
         index++;
+
+        if (ele.region == "Africa") {
+          createCard(".card-container-1", index1, ele);
+          index1++;
+        } else if (ele.region == "Americas") {
+          createCard(".card-container-2", index2, ele);
+          index2++;
+        } else if (ele.region == "Asia") {
+          createCard(".card-container-3", index3, ele);
+          index3++;
+        } else if (ele.region == "Europe") {
+          createCard(".card-container-4", index4, ele);
+          index4++;
+        } else if (ele.region == "Oceania") {
+          createCard(".card-container-5", index5, ele);
+          index5++;
+        }
       });
 
-      // filter for region
-      data.forEach((ele)=>{
-
-      })
+      // handling drop-down
+      document.querySelector("#filter-region").addEventListener("click", () => {
+        let selectedRegion = document.querySelector("#filter-region").value;
+        console.log(selectedRegion);
+        if(selectedRegion=='africa'){
+          document.querySelector('.card-container').style.display='none';
+          document.querySelector('.card-container-2').style.display='none';
+          document.querySelector('.card-container-3').style.display='none';
+          document.querySelector('.card-container-4').style.display='none';
+          document.querySelector('.card-container-5').style.display='none';
+          document.querySelector('.card-container-1').style.display='flex';
+        }
+        else if(selectedRegion=='america'){
+          document.querySelector('.card-container').style.display='none';
+          document.querySelector('.card-container-2').style.display='flex';
+          document.querySelector('.card-container-3').style.display='none';
+          document.querySelector('.card-container-4').style.display='none';
+          document.querySelector('.card-container-5').style.display='none';
+          document.querySelector('.card-container-1').style.display='none';
+        }
+        else if(selectedRegion=='asia'){
+          document.querySelector('.card-container').style.display='none';
+          document.querySelector('.card-container-2').style.display='none';
+          document.querySelector('.card-container-3').style.display='flex';
+          document.querySelector('.card-container-4').style.display='none';
+          document.querySelector('.card-container-5').style.display='none';
+          document.querySelector('.card-container-1').style.display='none';
+        }
+        else if(selectedRegion=='europe'){
+          document.querySelector('.card-container').style.display='none';
+          document.querySelector('.card-container-2').style.display='none';
+          document.querySelector('.card-container-3').style.display='none';
+          document.querySelector('.card-container-4').style.display='flex';
+          document.querySelector('.card-container-5').style.display='none';
+          document.querySelector('.card-container-1').style.display='none';
+        }
+       else if(selectedRegion=='oceania'){
+          document.querySelector('.card-container').style.display='none';
+          document.querySelector('.card-container-2').style.display='none';
+          document.querySelector('.card-container-3').style.display='none';
+          document.querySelector('.card-container-4').style.display='none';
+          document.querySelector('.card-container-5').style.display='flex';
+          document.querySelector('.card-container-1').style.display='none';
+        }
+        else{
+          document.querySelector('.card-container').style.display='flex';
+          document.querySelector('.card-container-2').style.display='none';
+          document.querySelector('.card-container-3').style.display='none';
+          document.querySelector('.card-container-4').style.display='none';
+          document.querySelector('.card-container-5').style.display='none';
+          document.querySelector('.card-container-1').style.display='none';
+        }
+      });
 
       // dark-mode
       let flag = true;
@@ -89,7 +146,8 @@ document.addEventListener("DOMContentLoaded", () => {
         .addEventListener("click", () => {
           if (flag) {
             document.body.style.backgroundColor = "hsl(207, 26%, 17%)";
-            document.querySelector("nav").style.backgroundColor = "hsl(209, 23%, 22%)";
+            document.querySelector("nav").style.backgroundColor =
+              "hsl(209, 23%, 22%)";
             document.querySelector("nav").style.color = "white";
             let content = document.querySelectorAll(".input-filter-item");
             content.forEach((ele) => {
@@ -105,14 +163,16 @@ document.addEventListener("DOMContentLoaded", () => {
             boldContent.forEach((ele) => {
               ele.style.color = "white";
             });
-
-            document.querySelector("select").style.backgroundColor = "hsl(209, 23%, 22%)";
+            document.querySelector("select").style.backgroundColor =
+              "hsl(209, 23%, 22%)";
             document.querySelector("select").style.color = "white";
 
             let myOptions = document.querySelectorAll(".filter-region-option");
             myOptions.forEach((ele) => {
               ele.style.color = "white";
             });
+            document.querySelector('input').style.color='white';
+            
           } else {
             document.body.style.backgroundColor = "hsl(0, 0%, 98%)";
             document.querySelector("nav").style.backgroundColor = "white";
@@ -137,6 +197,7 @@ document.addEventListener("DOMContentLoaded", () => {
             myOptions.forEach((ele) => {
               ele.style.color = "black";
             });
+            document.querySelector('input').style.color='black';
           }
           flag = !flag;
         });

@@ -47,7 +47,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         document.querySelector(
           `${containerName} .card-container-item:nth-child(${index}) .card-container-item-2 li:nth-child(1)`
-        ).innerHTML = "<b>Population:</b> " + ele.population;
+        ).innerHTML = "<b>Population:</b> " + ele.population.toLocaleString();
         document.querySelector(
           `${containerName} .card-container-item:nth-child(${index}) .card-container-item-2 li:nth-child(2)`
         ).innerHTML = "<b>Region:</b> " + ele.region;
@@ -85,59 +85,175 @@ document.addEventListener("DOMContentLoaded", () => {
         }
       });
 
-      // handling drop-down
-      document.querySelector("#filter-region").addEventListener("click", () => {
-        let selectedRegion = document.querySelector("#filter-region").value;
-        console.log(selectedRegion);
-        if(selectedRegion=='africa'){
-          document.querySelector('.card-container').style.display='none';
-          document.querySelector('.card-container-2').style.display='none';
-          document.querySelector('.card-container-3').style.display='none';
-          document.querySelector('.card-container-4').style.display='none';
-          document.querySelector('.card-container-5').style.display='none';
-          document.querySelector('.card-container-1').style.display='flex';
-        }
-        else if(selectedRegion=='america'){
-          document.querySelector('.card-container').style.display='none';
-          document.querySelector('.card-container-2').style.display='flex';
-          document.querySelector('.card-container-3').style.display='none';
-          document.querySelector('.card-container-4').style.display='none';
-          document.querySelector('.card-container-5').style.display='none';
-          document.querySelector('.card-container-1').style.display='none';
-        }
-        else if(selectedRegion=='asia'){
-          document.querySelector('.card-container').style.display='none';
-          document.querySelector('.card-container-2').style.display='none';
-          document.querySelector('.card-container-3').style.display='flex';
-          document.querySelector('.card-container-4').style.display='none';
-          document.querySelector('.card-container-5').style.display='none';
-          document.querySelector('.card-container-1').style.display='none';
-        }
-        else if(selectedRegion=='europe'){
-          document.querySelector('.card-container').style.display='none';
-          document.querySelector('.card-container-2').style.display='none';
-          document.querySelector('.card-container-3').style.display='none';
-          document.querySelector('.card-container-4').style.display='flex';
-          document.querySelector('.card-container-5').style.display='none';
-          document.querySelector('.card-container-1').style.display='none';
-        }
-       else if(selectedRegion=='oceania'){
-          document.querySelector('.card-container').style.display='none';
-          document.querySelector('.card-container-2').style.display='none';
-          document.querySelector('.card-container-3').style.display='none';
-          document.querySelector('.card-container-4').style.display='none';
-          document.querySelector('.card-container-5').style.display='flex';
-          document.querySelector('.card-container-1').style.display='none';
-        }
-        else{
-          document.querySelector('.card-container').style.display='flex';
-          document.querySelector('.card-container-2').style.display='none';
-          document.querySelector('.card-container-3').style.display='none';
-          document.querySelector('.card-container-4').style.display='none';
-          document.querySelector('.card-container-5').style.display='none';
-          document.querySelector('.card-container-1').style.display='none';
+      // input
+
+      document.querySelector("input").addEventListener("input", (e) => {
+        let inputVal = document
+          .querySelector("input")
+          .value.trim()
+          .toLowerCase();
+
+        console.log(inputVal);
+        if (document.querySelector("#filter-region").value == "africa") {
+          let a = document.querySelectorAll(
+            ".card-container-1 .card-container-item"
+          );
+          console.log(a);
+          a.forEach((selector) => {
+            if (
+              selector
+                .querySelector(`h3`)
+                .innerText.toLowerCase()
+                .includes(inputVal) == false
+            ) {
+              selector.style.display = "none";
+            } else {
+              selector.style.display = "block";
+            }
+          });
+        } else if (
+          document.querySelector("#filter-region").value == "america"
+        ) {
+          let a = document.querySelectorAll(
+            ".card-container-2 .card-container-item"
+          );
+          console.log(a);
+          a.forEach((selector) => {
+            if (
+              selector
+                .querySelector(`h3`)
+                .innerText.toLowerCase()
+                .includes(inputVal) == false
+            ) {
+              selector.style.display = "none";
+            } else {
+              selector.style.display = "block";
+            }
+          });
+        } else if (document.querySelector("#filter-region").value == "asia") {
+          let a = document.querySelectorAll(
+            ".card-container-3 .card-container-item"
+          );
+          console.log(a);
+          a.forEach((selector) => {
+            if (
+              selector
+                .querySelector(`h3`)
+                .innerText.toLowerCase()
+                .includes(inputVal) == false
+            ) {
+              selector.style.display = "none";
+            } else {
+              selector.style.display = "block";
+            }
+          });
+        } else if (document.querySelector("#filter-region").value == "europe") {
+          let a = document.querySelectorAll(
+            ".card-container-4 .card-container-item"
+          );
+          console.log(a);
+          a.forEach((selector) => {
+            if (
+              selector
+                .querySelector(`h3`)
+                .innerText.toLowerCase()
+                .includes(inputVal) == false
+            ) {
+              selector.style.display = "none";
+            } else {
+              selector.style.display = "block";
+            }
+          });
+        } else if (
+          document.querySelector("#filter-region").value == "oceania"
+        ) {
+          let a = document.querySelectorAll(
+            ".card-container-5 .card-container-item"
+          );
+          console.log(a);
+          a.forEach((selector) => {
+            if (
+              selector
+                .querySelector(`h3`)
+                .innerText.toLowerCase()
+                .includes(inputVal) == false
+            ) {
+              selector.style.display = "none";
+            } else {
+              selector.style.display = "block";
+            }
+          });
+        } else if (document.querySelector("#filter-region").value == "all") {
+          let a = document.querySelectorAll(
+            ".card-container .card-container-item"
+          );
+          console.log(a);
+          a.forEach((selector) => {
+            if (
+              selector
+                .querySelector(`h3`)
+                .innerText.toLowerCase()
+                .includes(inputVal) == false
+            ) {
+              selector.style.display = "none";
+            } else {
+              selector.style.display = "block";
+            }
+          });
         }
       });
+
+      // handling drop-down
+      document
+        .querySelector("#filter-region")
+        .addEventListener("click", (e) => {
+          document.querySelector("input").value = "";
+          let selectedRegion = e.target.value;
+
+          if (selectedRegion == "africa") {
+            document.querySelector(".card-container").style.display = "none";
+            document.querySelector(".card-container-2").style.display = "none";
+            document.querySelector(".card-container-3").style.display = "none";
+            document.querySelector(".card-container-4").style.display = "none";
+            document.querySelector(".card-container-5").style.display = "none";
+            document.querySelector(".card-container-1").style.display = "flex";
+          } else if (selectedRegion == "america") {
+            document.querySelector(".card-container").style.display = "none";
+            document.querySelector(".card-container-2").style.display = "flex";
+            document.querySelector(".card-container-3").style.display = "none";
+            document.querySelector(".card-container-4").style.display = "none";
+            document.querySelector(".card-container-5").style.display = "none";
+            document.querySelector(".card-container-1").style.display = "none";
+          } else if (selectedRegion == "asia") {
+            document.querySelector(".card-container").style.display = "none";
+            document.querySelector(".card-container-2").style.display = "none";
+            document.querySelector(".card-container-3").style.display = "flex";
+            document.querySelector(".card-container-4").style.display = "none";
+            document.querySelector(".card-container-5").style.display = "none";
+            document.querySelector(".card-container-1").style.display = "none";
+          } else if (selectedRegion == "europe") {
+            document.querySelector(".card-container").style.display = "none";
+            document.querySelector(".card-container-2").style.display = "none";
+            document.querySelector(".card-container-3").style.display = "none";
+            document.querySelector(".card-container-4").style.display = "flex";
+            document.querySelector(".card-container-5").style.display = "none";
+            document.querySelector(".card-container-1").style.display = "none";
+          } else if (selectedRegion == "oceania") {
+            document.querySelector(".card-container").style.display = "none";
+            document.querySelector(".card-container-2").style.display = "none";
+            document.querySelector(".card-container-3").style.display = "none";
+            document.querySelector(".card-container-4").style.display = "none";
+            document.querySelector(".card-container-5").style.display = "flex";
+            document.querySelector(".card-container-1").style.display = "none";
+          } else if (selectedRegion == "all") {
+            document.querySelector(".card-container").style.display = "flex";
+            document.querySelector(".card-container-2").style.display = "none";
+            document.querySelector(".card-container-3").style.display = "none";
+            document.querySelector(".card-container-4").style.display = "none";
+            document.querySelector(".card-container-5").style.display = "none";
+            document.querySelector(".card-container-1").style.display = "none";
+          }
+        });
 
       // dark-mode
       let flag = true;
@@ -171,8 +287,7 @@ document.addEventListener("DOMContentLoaded", () => {
             myOptions.forEach((ele) => {
               ele.style.color = "white";
             });
-            document.querySelector('input').style.color='white';
-            
+            document.querySelector("input").style.color = "white";
           } else {
             document.body.style.backgroundColor = "hsl(0, 0%, 98%)";
             document.querySelector("nav").style.backgroundColor = "white";
@@ -197,7 +312,7 @@ document.addEventListener("DOMContentLoaded", () => {
             myOptions.forEach((ele) => {
               ele.style.color = "black";
             });
-            document.querySelector('input').style.color='black';
+            document.querySelector("input").style.color = "black";
           }
           flag = !flag;
         });

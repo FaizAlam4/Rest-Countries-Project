@@ -51,10 +51,17 @@ document.addEventListener("DOMContentLoaded", () => {
         document.querySelector(
           `.card-container .card-container-item:nth-child(${index}) .card-container-item-2 li:nth-child(2)`
         ).innerHTML = "<b>Region:</b> " + ele.region;
+       if(!(ele.capital==undefined)){
 
+         document.querySelector(
+           `.card-container .card-container-item:nth-child(${index}) .card-container-item-2 li:nth-child(3)`
+         ).innerHTML = "<b>Capital:</b> " + ele.capital;
+       }
+       else{
         document.querySelector(
           `.card-container .card-container-item:nth-child(${index}) .card-container-item-2 li:nth-child(3)`
-        ).innerHTML = "<b>Capital:</b> " + ele.capital;
+        ).innerHTML = "<b>Capital:</b> " + 'Has No Capital';
+       }
       }
 
       // select options

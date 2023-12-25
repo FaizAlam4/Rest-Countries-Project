@@ -1,5 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
   console.log("Welcome to Faiz's website");
+
   let fetchData = async () => {
     try {
       var ans = await fetch("https://restcountries.com/v3.1/all");
@@ -7,7 +8,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       // making card-dom
 
-      function createCard(containerName, index, ele) {
+      function createCard(index, ele) {
         let newCard = document.createElement("div");
         newCard.className = "card-container-item";
         let div1 = document.createElement("div");
@@ -15,7 +16,7 @@ document.addEventListener("DOMContentLoaded", () => {
         let div2 = document.createElement("div");
         div2.className = "card-container-item-2";
 
-        document.querySelector(containerName).appendChild(newCard);
+        document.querySelector(".card-container").appendChild(newCard);
         newCard.append(div1, div2);
 
         let list = document.createElement("ul");
@@ -24,8 +25,7 @@ document.addEventListener("DOMContentLoaded", () => {
         let listItemHeading = document.createElement("h3");
 
         listItemHeading.className = "list-item-title";
-        div2.appendChild(listItemHeading);
-        div2.appendChild(list);
+        div2.append(listItemHeading, list);
 
         let listItem1 = document.createElement("li");
         let listItem2 = document.createElement("li");
@@ -38,222 +38,197 @@ document.addEventListener("DOMContentLoaded", () => {
         list.append(listItem1, listItem2, listItem3);
 
         document.querySelector(
-          `${containerName} .card-container-item:nth-child(${index}) .card-container-item-1`
+          `.card-container .card-container-item:nth-child(${index}) .card-container-item-1`
         ).innerHTML = `<img src="${ele.flags.svg}">`;
 
         document.querySelector(
-          `${containerName} .card-container-item:nth-child(${index}) .card-container-item-2 .list-item-title`
+          `.card-container .card-container-item:nth-child(${index}) .card-container-item-2 .list-item-title`
         ).innerText = ele.name.common;
 
         document.querySelector(
-          `${containerName} .card-container-item:nth-child(${index}) .card-container-item-2 li:nth-child(1)`
+          `.card-container .card-container-item:nth-child(${index}) .card-container-item-2 li:nth-child(1)`
         ).innerHTML = "<b>Population:</b> " + ele.population.toLocaleString();
         document.querySelector(
-          `${containerName} .card-container-item:nth-child(${index}) .card-container-item-2 li:nth-child(2)`
+          `.card-container .card-container-item:nth-child(${index}) .card-container-item-2 li:nth-child(2)`
         ).innerHTML = "<b>Region:</b> " + ele.region;
 
         document.querySelector(
-          `${containerName} .card-container-item:nth-child(${index}) .card-container-item-2 li:nth-child(3)`
+          `.card-container .card-container-item:nth-child(${index}) .card-container-item-2 li:nth-child(3)`
         ).innerHTML = "<b>Capital:</b> " + ele.capital;
       }
+ 
+      // select options
 
-      var index = 1,
-        index1 = 1,
-        index2 = 1,
-        index3 = 1,
-        index4 = 1,
-        index5 = 1;
-      data.forEach((ele) => {
-        createCard(".card-container", index, ele);
-        index++;
-
-        if (ele.region == "Africa") {
-          createCard(".card-container-1", index1, ele);
-          index1++;
-        } else if (ele.region == "Americas") {
-          createCard(".card-container-2", index2, ele);
-          index2++;
-        } else if (ele.region == "Asia") {
-          createCard(".card-container-3", index3, ele);
-          index3++;
-        } else if (ele.region == "Europe") {
-          createCard(".card-container-4", index4, ele);
-          index4++;
-        } else if (ele.region == "Oceania") {
-          createCard(".card-container-5", index5, ele);
-          index5++;
+      var regionVal = [];
+      data.forEach((countryData) => {
+        let selectMenu = document.querySelector("#filter-region");
+        let myOption = document.createElement("option");
+        myOption.className = "opt";
+        myOption.value = countryData.region;
+        myOption.innerHTML = countryData.region;
+        if (!regionVal.includes(countryData.region)) {
+          regionVal.push(countryData.region);
+          selectMenu.append(myOption);
         }
       });
+
+      let myOption = document.createElement("option");
+      myOption.className = "opt";
+      myOption.value = "all";
+
+      let i = 1;
+      data.forEach((country) => {
+        createCard(i, country);
+        i++;
+      });
+
+      myOption.innerText = "Filter by region";
+      myOption.setAttribute("selected", "selected");
+      document.querySelector("#filter-region").append(myOption);
+
+
+      // filter
+
+      document
+        .querySelector("#filter-region")
+        .addEventListener("change", (event) => {
+          document.querySelector(".card-container").innerHTML = "";
+          let index = 1,
+            index1 = 1;
+          if (event.target.value == "all") {
+            data.forEach((countryData) => {
+              createCard(index1, countryData);
+              index1++;
+            });
+          } else {
+            data.forEach((countryData) => {
+              if (countryData.region == event.target.value) {
+                createCard(index, countryData);
+                index++;
+              }
+            });
+          }
+        });
+
 
       // input
 
       document.querySelector("input").addEventListener("input", (e) => {
-        let inputVal = document
-          .querySelector("input")
-          .value.trim()
-          .toLowerCase();
-
-        console.log(inputVal);
-        if (document.querySelector("#filter-region").value == "africa") {
-          let a = document.querySelectorAll(
-            ".card-container-1 .card-container-item"
-          );
-          console.log(a);
-          a.forEach((selector) => {
-            if (
-              selector
-                .querySelector(`h3`)
-                .innerText.toLowerCase()
-                .includes(inputVal) == false
-            ) {
-              selector.style.display = "none";
-            } else {
-              selector.style.display = "block";
-            }
-          });
-        } else if (
-          document.querySelector("#filter-region").value == "america"
-        ) {
-          let a = document.querySelectorAll(
-            ".card-container-2 .card-container-item"
-          );
-          console.log(a);
-          a.forEach((selector) => {
-            if (
-              selector
-                .querySelector(`h3`)
-                .innerText.toLowerCase()
-                .includes(inputVal) == false
-            ) {
-              selector.style.display = "none";
-            } else {
-              selector.style.display = "block";
-            }
-          });
-        } else if (document.querySelector("#filter-region").value == "asia") {
-          let a = document.querySelectorAll(
-            ".card-container-3 .card-container-item"
-          );
-          console.log(a);
-          a.forEach((selector) => {
-            if (
-              selector
-                .querySelector(`h3`)
-                .innerText.toLowerCase()
-                .includes(inputVal) == false
-            ) {
-              selector.style.display = "none";
-            } else {
-              selector.style.display = "block";
-            }
-          });
-        } else if (document.querySelector("#filter-region").value == "europe") {
-          let a = document.querySelectorAll(
-            ".card-container-4 .card-container-item"
-          );
-          console.log(a);
-          a.forEach((selector) => {
-            if (
-              selector
-                .querySelector(`h3`)
-                .innerText.toLowerCase()
-                .includes(inputVal) == false
-            ) {
-              selector.style.display = "none";
-            } else {
-              selector.style.display = "block";
-            }
-          });
-        } else if (
-          document.querySelector("#filter-region").value == "oceania"
-        ) {
-          let a = document.querySelectorAll(
-            ".card-container-5 .card-container-item"
-          );
-          console.log(a);
-          a.forEach((selector) => {
-            if (
-              selector
-                .querySelector(`h3`)
-                .innerText.toLowerCase()
-                .includes(inputVal) == false
-            ) {
-              selector.style.display = "none";
-            } else {
-              selector.style.display = "block";
-            }
-          });
-        } else if (document.querySelector("#filter-region").value == "all") {
-          let a = document.querySelectorAll(
-            ".card-container .card-container-item"
-          );
-          console.log(a);
-          a.forEach((selector) => {
-            if (
-              selector
-                .querySelector(`h3`)
-                .innerText.toLowerCase()
-                .includes(inputVal) == false
-            ) {
-              selector.style.display = "none";
-            } else {
-              selector.style.display = "block";
-            }
-          });
-        }
+        let inputVal = e.target.value.trim().toLowerCase();
       });
 
-      // handling drop-down
-      document
-        .querySelector("#filter-region")
-        .addEventListener("click", (e) => {
-          document.querySelector("input").value = "";
-          let selectedRegion = e.target.value;
+      //   console.log(inputVal);
 
-          if (selectedRegion == "africa") {
-            document.querySelector(".card-container").style.display = "none";
-            document.querySelector(".card-container-2").style.display = "none";
-            document.querySelector(".card-container-3").style.display = "none";
-            document.querySelector(".card-container-4").style.display = "none";
-            document.querySelector(".card-container-5").style.display = "none";
-            document.querySelector(".card-container-1").style.display = "flex";
-          } else if (selectedRegion == "america") {
-            document.querySelector(".card-container").style.display = "none";
-            document.querySelector(".card-container-2").style.display = "flex";
-            document.querySelector(".card-container-3").style.display = "none";
-            document.querySelector(".card-container-4").style.display = "none";
-            document.querySelector(".card-container-5").style.display = "none";
-            document.querySelector(".card-container-1").style.display = "none";
-          } else if (selectedRegion == "asia") {
-            document.querySelector(".card-container").style.display = "none";
-            document.querySelector(".card-container-2").style.display = "none";
-            document.querySelector(".card-container-3").style.display = "flex";
-            document.querySelector(".card-container-4").style.display = "none";
-            document.querySelector(".card-container-5").style.display = "none";
-            document.querySelector(".card-container-1").style.display = "none";
-          } else if (selectedRegion == "europe") {
-            document.querySelector(".card-container").style.display = "none";
-            document.querySelector(".card-container-2").style.display = "none";
-            document.querySelector(".card-container-3").style.display = "none";
-            document.querySelector(".card-container-4").style.display = "flex";
-            document.querySelector(".card-container-5").style.display = "none";
-            document.querySelector(".card-container-1").style.display = "none";
-          } else if (selectedRegion == "oceania") {
-            document.querySelector(".card-container").style.display = "none";
-            document.querySelector(".card-container-2").style.display = "none";
-            document.querySelector(".card-container-3").style.display = "none";
-            document.querySelector(".card-container-4").style.display = "none";
-            document.querySelector(".card-container-5").style.display = "flex";
-            document.querySelector(".card-container-1").style.display = "none";
-          } else if (selectedRegion == "all") {
-            document.querySelector(".card-container").style.display = "flex";
-            document.querySelector(".card-container-2").style.display = "none";
-            document.querySelector(".card-container-3").style.display = "none";
-            document.querySelector(".card-container-4").style.display = "none";
-            document.querySelector(".card-container-5").style.display = "none";
-            document.querySelector(".card-container-1").style.display = "none";
-          }
-        });
+      //   if (document.querySelector("#filter-region").value == "africa") {
+      //     let a = document.querySelectorAll(
+      //       ".card-container-1 .card-container-item"
+      //     );
+      //     console.log(a);
+      //     a.forEach((selector) => {
+      //       if (
+      //         selector
+      //           .querySelector(`h3`)
+      //           .innerText.toLowerCase()
+      //           .includes(inputVal) == false
+      //       ) {
+      //         selector.style.display = "none";
+      //       } else {
+      //         selector.style.display = "block";
+      //       }
+      //     });
+      //   } else if (
+      //     document.querySelector("#filter-region").value == "america"
+      //   ) {
+      //     let a = document.querySelectorAll(
+      //       ".card-container-2 .card-container-item"
+      //     );
+      //     console.log(a);
+      //     a.forEach((selector) => {
+      //       if (
+      //         selector
+      //           .querySelector(`h3`)
+      //           .innerText.toLowerCase()
+      //           .includes(inputVal) == false
+      //       ) {
+      //         selector.style.display = "none";
+      //       } else {
+      //         selector.style.display = "block";
+      //       }
+      //     });
+      //   } else if (document.querySelector("#filter-region").value == "asia") {
+      //     let a = document.querySelectorAll(
+      //       ".card-container-3 .card-container-item"
+      //     );
+      //     console.log(a);
+      //     a.forEach((selector) => {
+      //       if (
+      //         selector
+      //           .querySelector(`h3`)
+      //           .innerText.toLowerCase()
+      //           .includes(inputVal) == false
+      //       ) {
+      //         selector.style.display = "none";
+      //       } else {
+      //         selector.style.display = "block";
+      //       }
+      //     });
+      //   } else if (document.querySelector("#filter-region").value == "europe") {
+      //     let a = document.querySelectorAll(
+      //       ".card-container-4 .card-container-item"
+      //     );
+      //     console.log(a);
+      //     a.forEach((selector) => {
+      //       if (
+      //         selector
+      //           .querySelector(`h3`)
+      //           .innerText.toLowerCase()
+      //           .includes(inputVal) == false
+      //       ) {
+      //         selector.style.display = "none";
+      //       } else {
+      //         selector.style.display = "block";
+      //       }
+      //     });
+      //   } else if (
+      //     document.querySelector("#filter-region").value == "oceania"
+      //   ) {
+      //     let a = document.querySelectorAll(
+      //       ".card-container-5 .card-container-item"
+      //     );
+      //     console.log(a);
+      //     a.forEach((selector) => {
+      //       if (
+      //         selector
+      //           .querySelector(`h3`)
+      //           .innerText.toLowerCase()
+      //           .includes(inputVal) == false
+      //       ) {
+      //         selector.style.display = "none";
+      //       } else {
+      //         selector.style.display = "block";
+      //       }
+      //     });
+      //   } else if (document.querySelector("#filter-region").value == "all") {
+      //     let a = document.querySelectorAll(
+      //       ".card-container .card-container-item"
+      //     );
+      //     console.log(a);
+      //     a.forEach((selector) => {
+      //       if (
+      //         selector
+      //           .querySelector(`h3`)
+      //           .innerText.toLowerCase()
+      //           .includes(inputVal) == false
+      //       ) {
+      //         selector.style.display = "none";
+      //       } else {
+      //         selector.style.display = "block";
+      //       }
+      //     });
+      //   }
+      // });
+
+      
 
       // dark-mode
       let flag = true;

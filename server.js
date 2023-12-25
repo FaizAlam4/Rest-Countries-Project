@@ -56,7 +56,7 @@ document.addEventListener("DOMContentLoaded", () => {
           `.card-container .card-container-item:nth-child(${index}) .card-container-item-2 li:nth-child(3)`
         ).innerHTML = "<b>Capital:</b> " + ele.capital;
       }
- 
+
       // select options
 
       var regionVal = [];
@@ -86,12 +86,12 @@ document.addEventListener("DOMContentLoaded", () => {
       myOption.setAttribute("selected", "selected");
       document.querySelector("#filter-region").append(myOption);
 
-
       // filter
 
       document
         .querySelector("#filter-region")
         .addEventListener("change", (event) => {
+          document.querySelector("input").value = "";
           document.querySelector(".card-container").innerHTML = "";
           let index = 1,
             index1 = 1;
@@ -110,125 +110,27 @@ document.addEventListener("DOMContentLoaded", () => {
           }
         });
 
-
       // input
 
       document.querySelector("input").addEventListener("input", (e) => {
         let inputVal = e.target.value.trim().toLowerCase();
+        console.log(inputVal);
+
+        document
+          .querySelectorAll(".card-container .card-container-item")
+          .forEach((card) => {
+            if (
+              !card
+                .querySelector("h3")
+                .innerText.toLowerCase()
+                .includes(inputVal)
+            ) {
+              card.style.display = "none";
+            } else {
+              card.style.display = "block";
+            }
+          });
       });
-
-      //   console.log(inputVal);
-
-      //   if (document.querySelector("#filter-region").value == "africa") {
-      //     let a = document.querySelectorAll(
-      //       ".card-container-1 .card-container-item"
-      //     );
-      //     console.log(a);
-      //     a.forEach((selector) => {
-      //       if (
-      //         selector
-      //           .querySelector(`h3`)
-      //           .innerText.toLowerCase()
-      //           .includes(inputVal) == false
-      //       ) {
-      //         selector.style.display = "none";
-      //       } else {
-      //         selector.style.display = "block";
-      //       }
-      //     });
-      //   } else if (
-      //     document.querySelector("#filter-region").value == "america"
-      //   ) {
-      //     let a = document.querySelectorAll(
-      //       ".card-container-2 .card-container-item"
-      //     );
-      //     console.log(a);
-      //     a.forEach((selector) => {
-      //       if (
-      //         selector
-      //           .querySelector(`h3`)
-      //           .innerText.toLowerCase()
-      //           .includes(inputVal) == false
-      //       ) {
-      //         selector.style.display = "none";
-      //       } else {
-      //         selector.style.display = "block";
-      //       }
-      //     });
-      //   } else if (document.querySelector("#filter-region").value == "asia") {
-      //     let a = document.querySelectorAll(
-      //       ".card-container-3 .card-container-item"
-      //     );
-      //     console.log(a);
-      //     a.forEach((selector) => {
-      //       if (
-      //         selector
-      //           .querySelector(`h3`)
-      //           .innerText.toLowerCase()
-      //           .includes(inputVal) == false
-      //       ) {
-      //         selector.style.display = "none";
-      //       } else {
-      //         selector.style.display = "block";
-      //       }
-      //     });
-      //   } else if (document.querySelector("#filter-region").value == "europe") {
-      //     let a = document.querySelectorAll(
-      //       ".card-container-4 .card-container-item"
-      //     );
-      //     console.log(a);
-      //     a.forEach((selector) => {
-      //       if (
-      //         selector
-      //           .querySelector(`h3`)
-      //           .innerText.toLowerCase()
-      //           .includes(inputVal) == false
-      //       ) {
-      //         selector.style.display = "none";
-      //       } else {
-      //         selector.style.display = "block";
-      //       }
-      //     });
-      //   } else if (
-      //     document.querySelector("#filter-region").value == "oceania"
-      //   ) {
-      //     let a = document.querySelectorAll(
-      //       ".card-container-5 .card-container-item"
-      //     );
-      //     console.log(a);
-      //     a.forEach((selector) => {
-      //       if (
-      //         selector
-      //           .querySelector(`h3`)
-      //           .innerText.toLowerCase()
-      //           .includes(inputVal) == false
-      //       ) {
-      //         selector.style.display = "none";
-      //       } else {
-      //         selector.style.display = "block";
-      //       }
-      //     });
-      //   } else if (document.querySelector("#filter-region").value == "all") {
-      //     let a = document.querySelectorAll(
-      //       ".card-container .card-container-item"
-      //     );
-      //     console.log(a);
-      //     a.forEach((selector) => {
-      //       if (
-      //         selector
-      //           .querySelector(`h3`)
-      //           .innerText.toLowerCase()
-      //           .includes(inputVal) == false
-      //       ) {
-      //         selector.style.display = "none";
-      //       } else {
-      //         selector.style.display = "block";
-      //       }
-      //     });
-      //   }
-      // });
-
-      
 
       // dark-mode
       let flag = true;

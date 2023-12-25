@@ -165,6 +165,7 @@ document.addEventListener("DOMContentLoaded", () => {
               ele.style.color = "white";
             });
             document.querySelector("input").style.color = "white";
+            document.querySelector('.nav-item:nth-child(2)').innerHTML='<i class="fa-solid fa-moon"></i> Light Mode';
           } else {
             document.body.style.backgroundColor = "hsl(0, 0%, 98%)";
             document.querySelector("nav").style.backgroundColor = "white";
@@ -190,6 +191,7 @@ document.addEventListener("DOMContentLoaded", () => {
               ele.style.color = "black";
             });
             document.querySelector("input").style.color = "black";
+            document.querySelector('.nav-item:nth-child(2)').innerHTML='<i class="fa-regular fa-moon"></i> Dark Mode';
           }
           flag = !flag;
         });
